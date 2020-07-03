@@ -8,7 +8,7 @@ task too, so this is for you, you can use this for free :)
 
 ## Want to Contribute to this project ?
 
-- forked the project [Judionit/check](https://github.com/Judionit/check)
+- fork the project [Judionit/check](https://github.com/Judionit/check)
 - clone your forked project
 - Create a branch for your change
 - make a pull request
