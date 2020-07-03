@@ -31,14 +31,18 @@ function reducer(state, action) {
 const TaskProvider = ({ children }) => {
   const datas = [
     {
-      id: 1,
-      name:
-        "hello from the other side, and test for this thing if he is responsive,",
+      id: Math.round(Math.random() * 10000),
+      name: "Start using this website,",
       completed: true,
     },
     {
-      id: 2,
-      name: "hmmm",
+      id: Math.round(Math.random() * 10000),
+      name: "create my first task",
+      completed: true,
+    },
+    {
+      id: Math.round(Math.random() * 10000),
+      name: "Do your thing now",
       completed: false,
     },
   ];

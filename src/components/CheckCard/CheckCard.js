@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FaTrash } from "react-icons/fa";
 import { CheckBox } from "../CheckBox";
 
-export const CheckCard = ({ title, value, onClick, onChange}) => {
+export const CheckCard = ({ title, value, onClick, onChange }) => {
   return (
     <Wrapper>
       <Section>
@@ -43,4 +43,9 @@ const Title = styled.span`
   margin-left: 10px;
   text-decoration: ${(props) =>
     props.completed === true ? "line-through" : ""};
+  max-width: 100%;
+
+  @media (max-width: 900px) {
+    font-size: 16px;
+  }
 `;
