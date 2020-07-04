@@ -4,10 +4,8 @@ import App from "./App";
 import { TaskProvider } from "./context/TaskContext";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <TaskProvider>
-      <App />
-    </TaskProvider>
-  </React.StrictMode>,
+  <TaskProvider>
+    <App />
+  </TaskProvider>,
   document.getElementById("root")
 );
