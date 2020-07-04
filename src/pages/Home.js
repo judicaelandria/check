@@ -5,6 +5,7 @@ import { Input } from "../components/Input";
 import { Button } from "../components/button";
 import { CheckCard } from "../components/CheckCard";
 import { TaskContext } from "../context/TaskContext";
+import { Grid } from "../components/Grid";
 
 const Home = () => {
   const initialState = { id: null, name: "", completed: false };
@@ -19,7 +20,7 @@ const Home = () => {
 
   //add task
   const createTask = () => {
-    if(!form.name) return
+    if (!form.name) return;
     dispatch({
       type: "add",
       payload: {
@@ -65,23 +66,25 @@ const Home = () => {
           />
           <Button onClick={createTask}>Add new Task</Button>
         </FormWrapper>
-        {state.length > 0 ? (
-          state.map((data) => (
-            <CheckCard
-              key={data.id}
-              title={data.name}
-              value={data.completed}
-              onClick={() => deleteTask(data.id)}
-              onChange={() => updateTask(data.id, data)}
-            />
-          ))
-        ) : (
-          <div
-            style={{ fontSize: "24px", fontWeight: "800", marginTop: "20px" }}
-          >
-            you have no task yet. Add a new one
-          </div>
-        )}
+        <Grid>
+          {state.length > 0 ? (
+            state.map((data) => (
+              <CheckCard
+                key={data.id}
+                title={data.name}
+                value={data.completed}
+                onClick={() => deleteTask(data.id)}
+                onChange={() => updateTask(data.id, data)}
+              />
+            ))
+          ) : (
+            <div
+              style={{ fontSize: "24px", fontWeight: "800", marginTop: "20px" }}
+            >
+              you have no task yet. Add a new one
+            </div>
+          )}
+        </Grid>
       </Wrapper>
     </Layout>
   );

@@ -15,16 +15,17 @@ export const CheckCard = ({ title, value, onClick, onChange }) => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.li`
   width: 100%;
-  height: 45px;
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  padding: 0.5rem 0;
 
   > svg {
+    min-width: 20px;
+    min-height: 20px;
     width: 20px;
     height: 20px;
     color: #f5f5f5;
@@ -34,7 +35,7 @@ const Wrapper = styled.div`
 const Section = styled.section`
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
 `;
 const Title = styled.span`
   font-size: 18px;
@@ -43,7 +44,7 @@ const Title = styled.span`
   margin-left: 10px;
   text-decoration: ${(props) =>
     props.completed === true ? "line-through" : ""};
-  max-width: 100%;
+  max-width: 90%;
 
   @media (max-width: 900px) {
     font-size: 16px;
