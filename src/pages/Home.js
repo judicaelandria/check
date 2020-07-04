@@ -5,12 +5,15 @@ import { Input } from "../components/Input";
 import { Button } from "../components/button";
 import { CheckCard } from "../components/CheckCard";
 import { TaskContext } from "../context/TaskContext";
-import { Grid } from "../components/Grid";
 
 const Home = () => {
   const initialState = { id: null, name: "", completed: false };
   const [form, setForm] = React.useState(initialState);
-  const { state, dispatch } = React.useContext(TaskContext);
+  const { tasks, setTasks } = React.useContext(TaskContext);
+
+  /**
+   * table
+   */
 
   //handle form change
   const handleChange = (event) => {
@@ -20,38 +23,24 @@ const Home = () => {
 
   //add task
   const createTask = () => {
-    if (!form.name) return;
-    dispatch({
-      type: "add",
-      payload: {
-        id: Math.round(Math.random() * 10000),
-        name: form.name,
-        completed: form.completed,
-      },
-    });
+    const task = {
+      id: Math.round(Math.random() * 10000),
+      name: form.name,
+      completed: false,
+    };
+    setTasks([...tasks, task]);
     setForm(initialState);
   };
 
   //function delete task
   const deleteTask = (id) => {
-    dispatch({
-      type: "delete",
-      payload: {
-        id,
-      },
-    });
+    setTasks(tasks.filter((task) => task.id !== id));
   };
 
   //function update task
   const updateTask = (id, data) => {
     data.completed = !data.completed;
-    dispatch({
-      type: "finish",
-      payload: {
-        id: id,
-        data,
-      },
-    });
+    setTasks(tasks.map((task) => (task.id === id ? data : task)));
   };
 
   return (
@@ -66,25 +55,23 @@ const Home = () => {
           />
           <Button onClick={createTask}>Add new Task</Button>
         </FormWrapper>
-        <Grid>
-          {state.length > 0 ? (
-            state.map((data) => (
-              <CheckCard
-                key={data.id}
-                title={data.name}
-                value={data.completed}
-                onClick={() => deleteTask(data.id)}
-                onChange={() => updateTask(data.id, data)}
-              />
-            ))
-          ) : (
-            <div
-              style={{ fontSize: "24px", fontWeight: "800", marginTop: "20px" }}
-            >
-              you have no task yet. Add a new one
-            </div>
-          )}
-        </Grid>
+        {tasks.length > 0 ? (
+          tasks.map((data) => (
+            <CheckCard
+              key={data.id}
+              title={data.name}
+              value={data.completed}
+              onClick={() => deleteTask(data.id)}
+              onChange={() => updateTask(data.id, data)}
+            />
+          ))
+        ) : (
+          <div
+            style={{ fontSize: "20px", fontWeight: "600", marginTop: "20px" }}
+          >
+            you have no task yet. Add a new one!
+          </div>
+        )}
       </Wrapper>
     </Layout>
   );
