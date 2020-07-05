@@ -48,7 +48,7 @@ const Home = () => {
     <Layout>
       <Wrapper>
         <FormWrapper>
-        <FormattedMessage id="Home.taskName"  defaultMessage="title placeholder">
+        <FormattedMessage id="Home.taskName"  defaultMessage="Task Name">
           { placeholder =>(  <Input
             name="name"
             value={form.name}
@@ -72,7 +72,7 @@ const Home = () => {
           <div
             style={{ fontSize: "20px", fontWeight: "600", marginTop: "20px" }}
           >
-          {<FormattedMessage id="Home.noTask" />}          
+          {<FormattedMessage id="Home.noTask" defaultMessage="you have no task yet. Add a new one!" />}          
           </div>
         )}
       </Wrapper>
