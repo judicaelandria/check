@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { FormattedMessage } from "react-intl";
 
 export const Button = ({ onClick }) => {
-  return <Wrapper onClick={onClick}>Add new Task</Wrapper>;
+  return <Wrapper onClick={onClick}><FormattedMessage id="Home.addNewTask" defaultMessage ="Add new Task"/></Wrapper>;
 };
 
 const Wrapper = styled.button`

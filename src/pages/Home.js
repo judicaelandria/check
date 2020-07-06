@@ -5,6 +5,7 @@ import { Input } from "../components/Input";
 import { Button } from "../components/button";
 import { CheckCard } from "../components/CheckCard";
 import { TaskContext } from "../context/TaskContext";
+import { FormattedMessage } from "react-intl";
 
 const Home = () => {
   const initialState = { id: null, name: "", completed: false };
@@ -47,13 +48,15 @@ const Home = () => {
     <Layout>
       <Wrapper>
         <FormWrapper>
-          <Input
+        <FormattedMessage id="Home.taskName"  defaultMessage="Task Name">
+          { placeholder =>(  <Input
             name="name"
             value={form.name}
             onChange={handleChange}
-            placeholder="Task name"
-          />
-          <Button onClick={createTask}>Add new Task</Button>
+            placeholder={placeholder}
+          />)}
+      </FormattedMessage>  
+        <Button onClick={createTask}><FormattedMessage id="Home.addNewTask" /></Button>
         </FormWrapper>
         {tasks.length > 0 ? (
           tasks.map((data) => (
@@ -69,7 +72,7 @@ const Home = () => {
           <div
             style={{ fontSize: "20px", fontWeight: "600", marginTop: "20px" }}
           >
-            you have no task yet. Add a new one!
+          {<FormattedMessage id="Home.noTask" defaultMessage="you have no task yet. Add a new one!" />}          
           </div>
         )}
       </Wrapper>
