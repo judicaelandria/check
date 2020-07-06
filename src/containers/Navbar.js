@@ -1,17 +1,32 @@
 import React from "react";
 import styled from "styled-components";
-import { FaSun, FaMoon } from "react-icons/fa";
+import { FaSun, FaMoon, FaGithub, FaRegTrashAlt } from "react-icons/fa";
 import PropTypes from "prop-types";
+import { ExternalLink } from "../components/ExternalLink";
+import { TaskContext } from "../context/TaskContext";
 
 export const NavBar = ({ toggle, isDark }) => {
+  const { setTasks } = React.useContext(TaskContext);
+  /**
+   * reset all task {tasks}
+   */
+  const reset = () => {
+    setTasks([]);
+  };
   return (
     <Wrapper>
       <img src={require("../images/logo.png")} alt="" className="logo" />
-      {isDark === "dark" ? (
-        <FaMoon onClick={toggle} />
-      ) : (
-        <FaSun onClick={toggle} />
-      )}
+      <Aside>
+        <FaRegTrashAlt title="Delete all task" onClick={reset} />
+        <ExternalLink link="https://github.com/Judionit/check">
+          <FaGithub />
+        </ExternalLink>
+        {isDark === "dark" ? (
+          <FaMoon onClick={toggle} />
+        ) : (
+          <FaSun onClick={toggle} />
+        )}
+      </Aside>
     </Wrapper>
   );
 };
@@ -31,7 +46,7 @@ const Wrapper = styled.div`
   flex-direction: row;
 
   @media (max-width: 900px) {
-    padding: 20px;
+    padding: 20px 10px;
   }
 
   > img.logo {
@@ -43,5 +58,22 @@ const Wrapper = styled.div`
     width: 20px;
     height: 20px;
     cursor: pointer;
+  }
+`;
+const Aside = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > :last-child {
+    margin: 0;
+  }
+
+  > svg,
+  > a > svg {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 18px;
   }
 `;

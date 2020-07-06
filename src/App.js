@@ -9,7 +9,6 @@ function App() {
   const [
     locale,
   ] = useState(LANGUAGE);
-  console.log(LANGUAGE)
   return (
     <>
     <IntlProvider locale={locale} messages={translations[LANGUAGE]}>

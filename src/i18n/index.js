@@ -1,8 +1,8 @@
-import { en, es} from "./translations";
+import { en, es } from "./translations";
 
 const translations = {
   en: en,
-  es: es
+  es: es,
 };
 
 export default translations;
