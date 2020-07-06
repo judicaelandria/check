@@ -28,7 +28,6 @@ const Wrapper = styled.li`
     min-height: 20px;
     width: 20px;
     height: 20px;
-    color: #f5f5f5;
     cursor: pointer;
   }
 `;
