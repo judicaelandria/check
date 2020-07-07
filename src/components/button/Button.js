@@ -11,7 +11,7 @@ const Wrapper = styled.button`
   height: 50px;
   border-radius: 5px;
   background-color: #4bffb6;
-  color: #ffffff;
+  color: ${({ theme }) => theme.text};
   margin-left: 15px;
   border: none;
   font-size: 16px;
