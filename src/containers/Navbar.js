@@ -4,6 +4,7 @@ import { FaSun, FaMoon, FaGithub, FaRegTrashAlt } from "react-icons/fa";
 import PropTypes from "prop-types";
 import { ExternalLink } from "../components/ExternalLink";
 import { TaskContext } from "../context/TaskContext";
+import { FormattedMessage } from "react-intl";
 
 export const NavBar = ({ toggle, isDark }) => {
   const { setTasks } = React.useContext(TaskContext);
@@ -17,7 +18,7 @@ export const NavBar = ({ toggle, isDark }) => {
     <Wrapper>
       <img src={require("../images/logo.png")} alt="" className="logo" />
       <Aside>
-        <FaRegTrashAlt title="Delete all task" onClick={reset} />
+        <FaRegTrashAlt title={<FormattedMessage id="Nav.deleteAllTask" defaultMessage="Delete all task" />} onClick={reset} />
         <ExternalLink link="https://github.com/Judionit/check">
           <FaGithub />
         </ExternalLink>
