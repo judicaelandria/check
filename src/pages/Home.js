@@ -23,7 +23,8 @@ const Home = () => {
   };
 
   //add task
-  const createTask = () => {
+const createTask = () => {
+    if(form.name){
     const task = {
       id: Math.round(Math.random() * 10000),
       name: form.name,
@@ -31,7 +32,7 @@ const Home = () => {
     };
     setTasks([...tasks, task]);
     setForm(initialState);
-  };
+  }};
 
   //function delete task
   const deleteTask = (id) => {
