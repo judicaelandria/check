@@ -1,13 +1,24 @@
-language: nodejs
+language: node_js
 
 node_js:
-  - "12"
+  - "13"
 
-script:
-  - yarn build
+services:
+  - docker
 
 before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version version-number
-  - export PATH="$HOME/.yarn/bin:$PAT"
-cache:
-  yarn: true
+  - npm install -g yarn
+
+script:
+  - yarn install
+  - docker build -t judicaelandria:check .
+  - docker images
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: e1d2f2cc-bd40-4ea8-ab9c-79d72731371a
+  app: check-eh
+  on:
+    repo: judicaelandria/check
+  skip_cleanup: true
