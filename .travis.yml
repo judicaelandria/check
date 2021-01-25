@@ -1,25 +1,20 @@
 language: node_js
-
 node_js:
-  - "13"
-
+- '13'
 services:
-  - docker
-
+- docker
 before_install:
-  - npm install -g yarn
-
+- npm install -g yarn
 script:
-  - yarn install
-  - docker build -t judicaelandria/check:v1 .
-  - docker images
-  - docker push judicaelandria/check:v1
-
+- yarn install
+- docker build -t judicaelandria/check:v1 .
+- docker images
+- docker push judicaelandria/check:v1
 deploy:
   provider: heroku
   api_key:
-    secure: e1d2f2cc-bd40-4ea8-ab9c-79d72731371a
+    secure: L9TBK2UgidfHHPAgO+XWQdvbCb7yIAMVPqOv1YEcNNCH88N74ZdqNCZ3aANCu0bUEM8VSPY5MFN6+cwdOYJKmSrxzpJn/RvGf3FaDr9JZNTVkYfyog2vDAnDKhWQJo0Rz+rw6Ocr8i1rgTDf7SSU57Ym9TCnfSNKbt5ZtEz9plE82FygPb3UFDE2UEnoHTefaEhPKJrcJRmIm1nBtqbUWaXtikDGK4SDrTuiJ9hf4b6rUvJFTlfK+e7RNXF/TX+V5KholCKW2C6X3pxP8NYXpaUj8V9m09z2EnEX8GXjlw8XEIIHeA2SFGUo6uAViis4HYFzNWzkJV1RD+nzSiAlt5fpFsq/9u92H4yf5n1LX7RphEfJfxWrT0+RtCxqUN0Q17azk+Krcc04h2WZ1wuFsk9XzoL8VnrwD5bajIeB+mLFiCdT1sWbBMLxwv55ZW55FiBMtIspL2Vrrkv5Z0s82jsiRZKbH3ZG5LsRqfIAEh63Z1d7Cvk1IpGATGWw0l2VcvHMpSHeFnU5UdnltLVFDpIq3VrcYVzwCMvApKyY6f6oPIBdf6lV9OKjpsLnm9t1AFZLzzgIJje00oIB2vgcnbeZiRbaXFddDTH8H2ueDlCQITmIsMi5b1Rk/eIkR9exkT7FoLygk/m6XoHPnXpqz634os/hBRYL/cgQa1Snh/U=
   app: check-eh
-  on:
+  true:
     repo: judicaelandria/check
   skip_cleanup: true
