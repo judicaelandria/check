@@ -11,8 +11,9 @@ before_install:
 
 script:
   - yarn install
-  - docker build -t judicaelandria:check .
+  - docker build -t judicaelandria/check:v1 .
   - docker images
+  - docker push judicaelandria/check:v1
 
 deploy:
   provider: heroku
