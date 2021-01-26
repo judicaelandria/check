@@ -3,8 +3,6 @@ node_js:
 - '13'
 services:
 - docker
-before_install:
-- npm install -g yarn
 script:
 - yarn install
 - docker build -t judicaelandria/check:v1 .
