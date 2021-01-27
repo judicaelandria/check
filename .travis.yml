@@ -5,9 +5,6 @@ services:
 - docker
 script:
 - yarn install
-- docker build -t judicaelandria/check:v1 .
-- docker images
-- bash docker_push
 deploy:
   provider: heroku
   api_key:
