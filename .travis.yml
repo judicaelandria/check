@@ -1,16 +1,13 @@
-language: node_js
-node_js:
-- '13'
+sudo: required
+language: generic
 services:
 - docker
+before_install:
+- docker build -t judicaelandria/check -f Dockerfile.dev .
 script:
-- yarn install
-before_deploy: echo 'ready to deploy'
+- docker run-e CI=true judicaelandria/check yarn test
 deploy:
   provider: heroku
-  api_key:
-    secure: o0VvbOxV8sRjnKTxc06Dnk0xFRkl1/YVn8UTmOKdZ7F17zHeed37eRA8NVBEht8M0lk9JxtOyPfILabkzmlNd0+ifeW2xRPQH5dZEFBx3PuQwOHrNGblwUhliZ5U+Ja1J6VFVmLyvKQ7td3ipovxWYJEeYehUOL2YD4Ox4hqFtSY7dRgIhcPJhjDEKqTKvZX9AXDEQHVaV8rbU8wV1FrkJYWZD/MyefQS9mcUEpHQZKG67irC55KnqCBs7p/c18J5OnOKnLsq5X7/rJL5C8tfZikR3WhUSWiZ2PS36s/miWfjnOwN7+phZOKK9NzC8zJmrYWG0LxQq+EAeDv/K1XAoHTrSv0caj7cL/++VqnPNvm6tbENNQ9Vfaqh4VV7H1vGP8e9aMawgR36R+qXAd1QB5OOt0sKghBYSV3vHiUQUAYlNN2P3wqxDHt6luiHZNUBenW3b6zzkRLWNaP/3BbbHP4isBna73pDMMeR+w4wipqrHGDqsq7G7U4CvwWBlRPuwi7+970g6Jmjb1pyviBfX7rSKdHu8bZmZ14R2rp9f5pTJrvqttfWchCQih5KAo1qrnHhDDcdU+C/hzrNwrQoF2c9Bj9tYKQGY9UCy0+Dfx8FM7CEpm1uXoBibhAwaiQSkumv/WA5EP8OA0pFZmPRvSTfC+N1QptHvFQ8Fj+0Yc=
   app: check-eh
-  on:
-    repo: judicaelandria/check
-  skip_cleanup: true
+  api_key:
+    secure: zk7FpowjT+hKkt7pXw10SK0llxQV0kgf63/kZj9eZI0a2twz3Z6Od7MnL+1ELJe27pF6DhcSNmByFI9yp45KYerg+Ust7Vi/UbzRr8halsgL/reznTJvoCXnNKu00wWIjjF2G8R40Hzk4P8xAmq8RiO8tc6lpuC1Aew2Fn61SIg1vWPRhY7/2wF1i4f+qTAqWMpkBfg8kVbl59aeF/8d4X1g9vDjnArmwfaczZ9gmCaV/KTOIQCrvsNXvGugbdxtxwohxu7VFO/85Eslfi4hHKGqlNZLXVUt7dbw25VoikBpfkX6AUqHrdzG55r0maPPYYbl/62Le0PbJJVEUUdjSV5ZVZOYDg1Rcaqbo/+AfRfGMHUBPmyCb9Xn8Wn2AvuDG2OHYmWRv0jPwk+pw+geYh4C9bw8UkTB6XQKru0RThCpTtuz6JRpZtpSqbJWCe6R21ZX7z7LxybKVhu2JC+GPW0e0J8CK2e8ZExyCnuRtw7JjYJowG5fFvLRtKxJNpocucdosOdRHul7nvtYM4Mn6GXUe96Se5atunsX+YgWQSYKydsiUv3YMeHYV+07hkCumETx8prMR/m94DWz6Ch397ZdEFvaXWm7n5lIsPQFtgd54y8tDg2acZEftJNLJfzzx3VMMG49FeU63MMqKQv0Z53wySuO+jlHUEDkm1V8ikw=
