@@ -1,19 +1,20 @@
 sudo: required
-language: generic
+language: nodejs
 services:
   - docker
 before_install:
-  - docker build -t judicaelandria/check -f Dockerfile.dev .
+  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+  - curl https://cli-assets.heroku.com/install.sh | sh  #install heroku
+  - docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
 script:
-  - docker run judicaelandria/check
-before_deploy:
-  - docker build -t judicaelandria/check .
+  - docker build -t judicaelandria/check:v1 .
+  - docker tag judicaelandria/check:v1 registry.heroku.com/$HEROKU_APP
+
 deploy:
-  skip_cleanup: true
-  provider: heroku
-  app: check-eh
-  api_key:
-    secure: zk7FpowjT+hKkt7pXw10SK0llxQV0kgf63/kZj9eZI0a2twz3Z6Od7MnL+1ELJe27pF6DhcSNmByFI9yp45KYerg+Ust7Vi/UbzRr8halsgL/reznTJvoCXnNKu00wWIjjF2G8R40Hzk4P8xAmq8RiO8tc6lpuC1Aew2Fn61SIg1vWPRhY7/2wF1i4f+qTAqWMpkBfg8kVbl59aeF/8d4X1g9vDjnArmwfaczZ9gmCaV/KTOIQCrvsNXvGugbdxtxwohxu7VFO/85Eslfi4hHKGqlNZLXVUt7dbw25VoikBpfkX6AUqHrdzG55r0maPPYYbl/62Le0PbJJVEUUdjSV5ZVZOYDg1Rcaqbo/+AfRfGMHUBPmyCb9Xn8Wn2AvuDG2OHYmWRv0jPwk+pw+geYh4C9bw8UkTB6XQKru0RThCpTtuz6JRpZtpSqbJWCe6R21ZX7z7LxybKVhu2JC+GPW0e0J8CK2e8ZExyCnuRtw7JjYJowG5fFvLRtKxJNpocucdosOdRHul7nvtYM4Mn6GXUe96Se5atunsX+YgWQSYKydsiUv3YMeHYV+07hkCumETx8prMR/m94DWz6Ch397ZdEFvaXWm7n5lIsPQFtgd54y8tDg2acZEftJNLJfzzx3VMMG49FeU63MMqKQv0Z53wySuO+jlHUEDkm1V8ikw=
+  provider: script
+  script:
+    docker push judicaelandria/check:v1;
+    docker push registry.heroku.com/$HEROKU_APP/web;
+    heroku container:release web --app $HEROKU_LOGIN
   on:
-    repo: judicaelandria/check
     branch: master
