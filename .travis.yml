@@ -5,20 +5,21 @@ node_js:
 services:
   - docker
 
-before_install:
+before_script:
   - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
   - curl https://cli-assets.heroku.com/install.sh | sh  #install heroku
   - docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
 
 script:
-  - docker build -t judicaelandria/check:v1 .
-  - docker tag judicaelandria/check:v1 registry.heroku.com/$HEROKU_APP/web
+  - docker build -t judicaelandria/check:v2 .
+  - docker tag judicaelandria/check:v2 registry.heroku.com/$HEROKU_APP/web
 
 deploy:
   provider: script
   script:
-    docker push judicaelandria/check:v1;
+    docker push judicaelandria/check:v2;
     docker push registry.heroku.com/$HEROKU_APP/web;
     heroku container:release web --app $HEROKU_APP
   on:
+    repo: judicaelandria/check
     branch: master
