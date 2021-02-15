@@ -1,11 +1,15 @@
 sudo: required
-language: nodejs
+language: node_js
+node_js:
+  - "14"
 services:
   - docker
+
 before_install:
   - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
   - curl https://cli-assets.heroku.com/install.sh | sh  #install heroku
   - docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
+
 script:
   - docker build -t judicaelandria/check:v1 .
   - docker tag judicaelandria/check:v1 registry.heroku.com/$HEROKU_APP
